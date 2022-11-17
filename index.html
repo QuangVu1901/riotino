@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Rio Tino Assignment</title>
+        <meta charset="UTF-8" />
+        <script src="https://vega.github.io/vega/vega.min.js"></script>
+    </head>
+
+    <body>
+        <h1>SQL data</h1>
+        <h2>Please rewrite the starting query to do the following:</h2>					
+        <h3>Relabel the [Loader] column to display as Shovels,					
+            Relabel the [Hauler] column to display as Haul Trucks,					
+            Only have data pull for the month of September 2021 </h3>
+        <p>SELECT TOP (1000) [DateOp]				
+            ,[ShiftID]				
+            ,[Loader] as [Shovels]				
+            ,[Loader_FleetID]				
+            ,[Loader_FleetDesc]				
+            ,[Hauler] as [Haul Trucks]				
+            ,[Origin]				
+            ,[Sector]				
+            ,[NominalWeight]				
+            ,[PayLoadWeight]				
+            ,[MaterialDesc]				
+            ,[DumpDateOpKey]				
+            ,[OperationKey]				
+            ,[DateTimeStart]				
+            ,[LoaderKey]				
+            ,[HaulerKey]				
+        FROM [MineSQLServer].[dbo].[MineDataTableEx] 
+        WHERE CAST(DateTimeStart as time) between '2021-09-01 00:00:01.00 -07:00' and '2021-09-30 23:59:59.00 -07:00' </p>
+        <h3>Create a column, or seprate query, that displays the [PayLoadWeight] daily sum (+) total grouped by Sector</h3>
+        <p> SELECT [Sector], Sum [PayLoadWeight] FROM [MineSQLServer].[dbo].[MineDataTableEx]</p>
+        <h3>How would you perform a JOIN on the second query shown?</h3>
+        <p>I would do select to pick all the column I want to display from each table and then do the inner join on Sector column</p>
+        <h1>Data visualization for 2 dataset</h1>
+        <div id="view1"></div>
+        <h1>Insights, Concern, and Observation of datasets #1</h1>
+        <p>In this visualization, I group the data base on TimeCodeDesc and calculate average duration</p>
+        <p> This visualization has Shift option so that you can choose day, night and all (both day and night) shift</p>
+        <p> You can hover through the bar to see the second of each type</p>
+        <P> The Electrical Drive/ High Voltage has the longest average duration both day and night </P>
+        <p> while the engine has similar average duration with Electrical Drive/ High Voltage at night </p>
+        <p> its average duration during the day is shorter. Suspension is another noticeable case since </p>
+        <p> it has longest duration during the day and way shorter during the night. Dump has the shortest</p>
+        <p> average duration both day and night.</p>
+        <div id="view2"></div>
+        <h1>Insights, Concern, and Observation of datasets #2</h1>
+        <p> In this visualization, I group data base on MaterialDesc column and calculate the total weight of each type</p>
+        <p> This visualization has Shift option so that you can choose day, night and all (both day and night) shift </p>
+        <p> You can hover through the bar to see the weight of each type</p>
+        <p> In this visualization, the waste has the largest weight overall (both day and night) while construction type </p>
+        <p> has the smallest weight. The Crusher one has larger total weight than inplit stockpile during the night but</p>
+        <p> during the day, inplit stockpile has larger total weight</p>
+
+        
+    </body>
+
+    <script src="source/riotino.js"></script>
+    
+</html>
